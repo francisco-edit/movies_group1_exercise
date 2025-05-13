@@ -1,0 +1,96 @@
+version: 2
+
+models:
+  - name: stg_connection_tag
+    description: Tabela com detalhes de cada tag
+    columns:
+      - name: tag_id
+        description: ID único da tag e não nulo
+        tests:
+          - unique
+          - not_null
+
+      - name: tag
+        description: Descritivo da tag único e não nulo
+        tests:
+          - unique
+          - not_null
+
+  - name: stg_movies
+    description: Tabela com detalhes de cada filme
+    columns:
+      - name: movie_id
+        description: ID único do filme e não nulo
+        tests:
+          - unique
+          - not_null
+
+      - name: title
+        description: Título do filme não nulo
+        tests:
+          - not_null
+
+  - name: stg_ratings
+    description: Tabela com classicação que cada user dá a cada filme
+    columns:
+      - name: movie_id
+        description: ID do filme não nulo
+        tests:
+          - not_null
+          - relationships:
+              to: ref('movies')
+              field: movie_id
+
+      - name: user_id
+        description: ID do user não nulo
+        tests:
+          - not_null
+
+      - name: rating
+        description: Validar data type do rating e não nulo
+        data_type: decimal
+        tests:
+          - not_null
+
+
+  - name: stg_relevancy
+    description: Tabela com relevância de cada tag para cada filme
+    columns:
+      - name: movie_id
+        description: ID do filme não nulo e relacionado com a tabela movies
+        tests:
+          - not_null
+          - relationships:
+              to: ref('movies')
+              field: movie_id
+
+      - name: tag_id
+        description: Tag ID não nulo e relacionado com a tabela connection_tags
+        tests:
+          - not_null
+          - relationships:
+              to: ref('connection_tags')
+              field: tag_id
+
+      - name: relevance
+        description: Relevancia da tag decimal e não nulo
+        data_type: decimal
+        tests:
+          - not_null
+
+        
+  - name: stg_tag
+    description: Tag atribuida por cada user a cada filme
+    columns:
+      - name: movie_id
+        description: ID do filme não nulo e relacionado com a tabela movies
+        tests:
+          - not_null
+          - relationships:
+              to: ref('movies')
+              field: movie_id
+
+      - name: user_id
+        description: ID do user não nulo
+        tests:
+          - not_null

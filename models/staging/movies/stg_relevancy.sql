@@ -1,0 +1,1 @@
+select movieid as movie_id, tagid as tag_id, relevance from movies.relevancy

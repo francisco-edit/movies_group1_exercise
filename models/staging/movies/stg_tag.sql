@@ -1,0 +1,1 @@
+select userid as user_id, movieid as movie_id, t.tag, timestamp as tag_date from movies.tag t

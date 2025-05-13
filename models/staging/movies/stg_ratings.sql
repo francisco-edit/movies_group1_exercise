@@ -1,0 +1,1 @@
+select userid as user_id, movieid as movie_id, r.rating, timestamp as rating_date from movies.rating r

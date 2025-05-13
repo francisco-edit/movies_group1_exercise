@@ -1,0 +1,1 @@
+select tagid as tag_id, tag from movies.connection_tags

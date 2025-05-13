@@ -1,0 +1,1 @@
+select movieid as movie_id, title, genres from movies.movies

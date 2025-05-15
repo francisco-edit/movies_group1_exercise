@@ -1,0 +1,1 @@
+select user_id, avg(rating) as avaliacao_media, count(rating) as numero_contribuicoes, min(rating_date) as primeira_contribuicao from {{ref('stg_ratings')}} group by user_id
